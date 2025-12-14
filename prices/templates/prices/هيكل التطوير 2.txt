@@ -1,0 +1,28 @@
+price_web/
+│
+├─ manage.py
+├─ db.sqlite3
+├─ requirements.txt
+│
+├─ price_web/
+│  ├─ __init__.py
+│  ├─ settings.py
+│  ├─ urls.py
+│  └─ wsgi.py
+│
+├─ prices/
+│  ├─ __init__.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ models.py           # ✅ تم تعديل هذا الملف
+│  ├─ views.py            # ✅ تم تعديل هذا الملف
+│  ├─ urls.py             # ✅ تم تعديل هذا الملف
+│  ├─ forms.py            # ✅ تم إضافة ملف جديد لإدارة الاستيراد
+│  ├─ templates/
+│  │   ├─ login.html
+│  │   ├─ table.html       # ✅ تم تعديل لإظهار الرسائل
+│  │   └─ messages.html    # ✅ تم إضافة مربع نص لعرض الرسائل التسويقية
+│  └─ static/              # ملفات CSS/JS إذا لزم الأمر
+│
+└─ prices_excel/           # مجلد لتخزين Excel المصدر والمحدث
+   └─ products.xlsx
