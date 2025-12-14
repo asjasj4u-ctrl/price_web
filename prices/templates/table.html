@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>جدول الأسعار</title>
+</head>
+<body>
+    <h2>جدول الأسعار</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table border="1">
+            <tr>
+                <th>المنتج</th>
+                <th>السعر العادي</th>
+                <th>الدكان</th>
+                <th>كيان</th>
+                <th>المنافس</th>
+                <th>العثيم</th>
+                <th>أمازون</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td><input type="text" name="normal_price_{{ product.id }}" value="{{ product.normal_price }}"></td>
+                <td><input type="text" name="dukkan_{{ product.id }}" value="{{ product.dukk }}"></td>
+                <td><input type="text" name="kian_{{ product.id }}" value="{{ product.kian }}"></td>
+                <td><input type="text" name="competitor_{{ product.id }}" value="{{ product.competitor }}"></td>
+                <td><input type="text" name="othaim_{{ product.id }}" value="{{ product.othaim }}"></td>
+                <td><input type="text" name="amazon_{{ product.id }}" value="{{ product.amazon }}"></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">حفظ</button>
+    </form>
+</body>
+</html>
