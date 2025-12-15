@@ -1,0 +1,16 @@
+price_web/
+├─ manage.py
+├─ price_web/           <-- مجلد إعدادات المشروع
+│  ├─ __init__.py
+│  ├─ settings.py
+│  ├─ urls.py
+│  └─ wsgi.py
+└─ prices/              <-- تطبيق المنتجات
+   ├─ __init__.py
+   ├─ models.py
+   ├─ views.py
+   ├─ urls.py
+   └─ templates/
+       └─ prices/
+           ├─ base.html
+           └─ table.html

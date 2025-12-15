@@ -1,36 +1,8 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>لوحة الأسعار اليومية</h2>
-<form method="post">
-    {% csrf_token %}
-    <table border="1">
-        <tr>
-            <th>المنتج</th>
-            <th>السعر العادي</th>
-            <th>الدكان</th>
-            <th>كيان</th>
-            <th>المنافس</th>
-            <th>العثيم</th>
-            <th>أمازون</th>
-        </tr>
-        {% for p in products %}
-        <tr>
-            <td>{{ p.name }}</td>
-            <td>{{ p.regular_price }}</td>
-            <td><input type="text" name="dukkan_{{ p.id }}" value="{{ p.dukkan }}"></td>
-            <td><input type="text" name="kian_{{ p.id }}" value="{{ p.kian }}"></td>
-            <td><input type="text" name="competitor_{{ p.id }}" value="{{ p.competitor }}"></td>
-            <td><input type="text" name="othaim_{{ p.id }}" value="{{ p.othaim }}"></td>
-            <td><input type="text" name="amazon_{{ p.id }}" value="{{ p.amazon }}"></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <button type="submit">حفظ التعديلات</button>
-</form>
+{% extends "base.html" %}
 
-<h3>الرسائل التسويقية</h3>
-{% for msg in messages %}
-<textarea rows="12" cols="100">{{ msg }}</textarea>
-<br><br>
-{% endfor %}
+{% block title %}لوحة الأسعار{% endblock %}
+
+{% block content %}
+<h2>جدول الأسعار</h2>
+<!-- هنا جدول المنتجات والمربع النصي للرسائل -->
 {% endblock %}
