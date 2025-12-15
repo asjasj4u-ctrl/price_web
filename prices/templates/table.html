@@ -3,6 +3,90 @@
 {% block title %}لوحة الأسعار{% endblock %}
 
 {% block content %}
-<h2>جدول الأسعار</h2>
-<!-- هنا جدول المنتجات والمربع النصي للرسائل -->
+<h2>لوحة الأسعار</h2>
+
+<!-- نموذج جدول الأسعار -->
+<form method="POST">
+    {% csrf_token %}
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>المنتج</th>
+                <th>الدكان</th>
+                <th>كيان</th>
+                <th>المنافس</th>
+                <th>العثيم</th>
+                <th>أمازون</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td><input type="text" name="dukkan_{{ product.id }}" value="{{ product.dukkan }}"></td>
+                <td><input type="text" name="kian_{{ product.id }}" value="{{ product.kian }}"></td>
+                <td><input type="text" name="competitor_{{ product.id }}" value="{{ product.competitor }}"></td>
+                <td><input type="text" name="othaim_{{ product.id }}" value="{{ product.othaim }}"></td>
+                <td><input type="text" name="amazon_{{ product.id }}" value="{{ product.amazon }}"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit">حفظ التعديلات</button>
+</form>
+
+<hr>
+
+<!-- قسم الرسائل التسويقية -->
+<h3>الرسائل التسويقية</h3>
+<div id="message-box" style="white-space: pre-wrap; border:1px solid #ccc; padding:10px; min-height:100px;">
+    {{ messages.0 }}
+</div>
+
+<button id="prev-btn">السابق</button>
+<button id="next-btn">التالي</button>
+<button id="copy-btn">نسخ</button>
+
+<script>
+    // رسائل التسويقية من views.py
+    const messages = {{ messages|safe }};
+    let currentIndex = 0;
+
+    const messageBox = document.getElementById('message-box');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // تحديث الرسالة المعروضة
+    function updateMessage() {
+        messageBox.textContent = messages[currentIndex];
+    }
+
+    // أزرار التنقل
+    prevBtn.addEventListener('click', () => {
+        if(currentIndex > 0){
+            currentIndex--;
+            updateMessage();
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if(currentIndex < messages.length - 1){
+            currentIndex++;
+            updateMessage();
+        }
+    });
+
+    // زر النسخ
+    copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(messages[currentIndex]).then(() => {
+            alert('تم نسخ الرسالة!');
+        });
+    });
+
+    // عرض أول رسالة عند تحميل الصفحة
+    updateMessage();
+</script>
+
 {% endblock %}
